@@ -92,6 +92,7 @@ fun AddDish(
                 }
                 Spacer(modifier = Modifier.width(8.dp))
                 Button(onClick = {
+                    if (dishCalories.value.toIntOrNull() == null || dishName.value.isEmpty()) return@Button
                     viewModel.addDish(
                         Dish(
                             0,

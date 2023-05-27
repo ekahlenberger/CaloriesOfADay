@@ -24,8 +24,7 @@ abstract class CaloriesDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         CaloriesDatabase::class.java,
-                        "calories_database"
-                    )
+                        "calories_database")
                         .fallbackToDestructiveMigration()
                         .build()
                     INSTANCE = instance
