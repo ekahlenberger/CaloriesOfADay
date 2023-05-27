@@ -33,7 +33,8 @@ fun <T> ComboBox(
     selectedItem: MutableState<T>,
     labelText: String,
     modifier: Modifier = Modifier,
-    textFieldModifier: Modifier = Modifier
+    textFieldModifier: Modifier = Modifier,
+    itemToString: (T) -> String = { it.toString() },
 ) {
     var expanded by remember { mutableStateOf(false) }
     var textfieldSize by remember { mutableStateOf(IntSize.Zero) }
@@ -47,7 +48,7 @@ fun <T> ComboBox(
 
     Box(modifier) {
         OutlinedTextField(
-            value = selectedItem.value.toString(),
+            value = itemToString(selectedItem.value),
             onValueChange = { },
             label = { Text(labelText) },
             trailingIcon = {
@@ -89,7 +90,7 @@ fun <T> ComboBox(
                     selectedItem.value = item
                     expanded = false
                 }) {
-                    Text(text = item.toString())
+                    Text(text = itemToString(item))
                 }
             }
         }

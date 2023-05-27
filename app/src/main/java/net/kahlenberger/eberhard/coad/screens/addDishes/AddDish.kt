@@ -113,6 +113,7 @@ fun AddDish(
                             items(selectedChildDishes) { (dish, quantity) ->
                                 Row {
                                     Text(dish.name)
+                                    Text(" x")
                                     Text(quantity)
                                 }
                             }
@@ -137,8 +138,8 @@ fun AddDish(
                             0,
                             dishName.value,
                             dishCalories.value.toInt(),
-                            MeasurementUnit.Grams,
-                            "100",
+                            dishUnit.value,
+                            dishAmount.value,
                             selectedChildDishes.map { p -> p.first })
                     )
                     navController.navigateUp()
