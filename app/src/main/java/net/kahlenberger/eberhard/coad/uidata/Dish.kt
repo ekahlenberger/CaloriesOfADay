@@ -1,26 +1,12 @@
 package net.kahlenberger.eberhard.coad.uidata
 
 import net.kahlenberger.eberhard.coad.backend.DishEntity
-
-
-enum class MeasurementUnit {
-    Grams,
-    Kilograms,
-    Liters,
-    Milliliters,
-    Pints,
-    Quarts,
-    Gallons,
-    Pounds,
-    Ounces,
-    Drams,
-
-    // Add more units as needed
-}
+import net.kahlenberger.eberhard.coad.backend.MeasurementUnit
+import kotlin.math.roundToInt
 
 
 data class Dish(
-    val id: Int = 0,
+    val id: Long = 0,
     val name: String,
     val calories: Int,
     val unit: MeasurementUnit,
@@ -35,6 +21,11 @@ data class Dish(
 
     fun toEntityModel(): DishEntity {
         return DishEntity(id, name, calories, unit, basicQuantityInput)
+    }
+    fun adjusted(adjustedQuantity: String): Dish {
+        val adjustedCal = ((calories.toDouble() / basicQuantity) * adjustedQuantity.toDouble()).roundToInt()
+        val adjustedDish = copy(calories = adjustedCal, basicQuantityInput = adjustedQuantity)
+        return adjustedDish
     }
 }
 

@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import net.kahlenberger.eberhard.coad.screens.Screen
-import net.kahlenberger.eberhard.coad.screens.dishes.AddDish
+import net.kahlenberger.eberhard.coad.screens.addDishes.AddDish
 import net.kahlenberger.eberhard.coad.screens.dishes.DishesScreen
 import net.kahlenberger.eberhard.coad.screens.home.HomeScreen
 import net.kahlenberger.eberhard.coad.uidata.ConfiguredLimits

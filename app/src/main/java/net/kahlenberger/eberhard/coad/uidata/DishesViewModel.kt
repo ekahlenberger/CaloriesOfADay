@@ -16,6 +16,9 @@ class DishesViewModel (application: Application, private val dishesDao: DishDao)
         get() = _dishes
 
     init {
+        viewModelScope.launch {
+            dishesDao.deleteOrphanedCrossRefs()
+        }
         loadDishes()
     }
 
@@ -30,9 +33,9 @@ class DishesViewModel (application: Application, private val dishesDao: DishDao)
     fun addDish(dish: Dish) {
         viewModelScope.launch {
             val dishEntity = dish.toEntityModel()
-            dishesDao.insert(dishEntity)
+            val dishId = dishesDao.insert(dishEntity)
             for (child in dish.childDishes)
-                dishesDao.insertCrossRef(DishCrossRef(dishEntity.id, child.id))
+                dishesDao.insertCrossRef(DishCrossRef(dishId, child.id, child.basicQuantityInput))
             loadDishes()
         }
     }

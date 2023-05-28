@@ -1,4 +1,4 @@
-package net.kahlenberger.eberhard.coad.screens.dishes
+package net.kahlenberger.eberhard.coad.screens.addDishes
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,12 +28,11 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import net.kahlenberger.eberhard.coad.backend.MeasurementUnit
 import net.kahlenberger.eberhard.coad.screens.SingleLineNextTextField
-import net.kahlenberger.eberhard.coad.screens.addDishes.AddChildDishDialog
 import net.kahlenberger.eberhard.coad.ui.ComboBox
 import net.kahlenberger.eberhard.coad.uidata.Dish
 import net.kahlenberger.eberhard.coad.uidata.DishesViewModel
-import net.kahlenberger.eberhard.coad.uidata.MeasurementUnit
 
 @Composable
 fun AddDish(
@@ -138,7 +137,7 @@ fun AddDish(
                             dishCalories.value.toInt(),
                             dishUnit.value,
                             dishAmount.value,
-                            selectedChildDishes.map { p -> p.first })
+                            selectedChildDishes.map { p -> p.first.adjusted(p.second) })
                     )
                     navController.navigateUp()
                 }) {
