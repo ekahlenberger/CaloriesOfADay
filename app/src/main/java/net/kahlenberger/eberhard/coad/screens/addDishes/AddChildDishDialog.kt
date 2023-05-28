@@ -1,6 +1,7 @@
 package net.kahlenberger.eberhard.coad.screens.addDishes
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
@@ -12,6 +13,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import net.kahlenberger.eberhard.coad.ui.ComboBox
 import net.kahlenberger.eberhard.coad.uidata.Dish
@@ -24,17 +26,19 @@ fun AddChildDishDialog(showChildDishDialog: MutableState<Boolean>, dishes: List<
     if (!showChildDishDialog.value) return
     AlertDialog(
         onDismissRequest = { showChildDishDialog.value = false },
-        title = { Text("Add Child Dish") },
+        title = { Text("Add Child Dish " + (selectedDish.value?.name ?: "")) },
         text = {
             Column (
                 horizontalAlignment = Alignment.Start
                     ) {
                 ComboBox(items = dishes, selectedItem = selectedDish, labelText = "Dish", itemToString = { dish -> dish?.name ?: ""})
+                Text((selectedDish.value?.calories?.toString() ?: "") + " kcal /"  + (selectedDish.value?.basicQuantity?.toString() ?: "") + " " + (selectedDish.value?.unit?.toString() ?: ""))
                 OutlinedTextField(
                     value = selectedQuantity.value,
                     onValueChange = { selectedQuantity.value = it },
-                    label = { Text("Quantity") },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                    label = { Text("Quantity" + " in " + (selectedDish.value?.unit?.toString() ?: "")) },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
         },

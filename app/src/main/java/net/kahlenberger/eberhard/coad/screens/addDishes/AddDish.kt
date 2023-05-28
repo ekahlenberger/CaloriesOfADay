@@ -112,9 +112,7 @@ fun AddDish(
                         LazyColumn {
                             items(selectedChildDishes) { (dish, quantity) ->
                                 Row {
-                                    Text(dish.name)
-                                    Text(" x")
-                                    Text(quantity)
+                                    Text(dish.name + " - " + quantity + " " + dish.unit)
                                 }
                             }
                         }
