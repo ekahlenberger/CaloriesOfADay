@@ -22,9 +22,10 @@ enum class MeasurementUnit {
     Dashes,
 
     // Add more units as needed
+
 }
-fun getResourceId(unit: MeasurementUnit): Int {
-    return when (unit) {
+fun MeasurementUnit.getResourceId(): Int {
+    return when (this) {
         MeasurementUnit.Grams -> R.string.grams
         MeasurementUnit.Kilograms -> R.string.kilograms
         MeasurementUnit.Liters -> R.string.liters
@@ -44,3 +45,25 @@ fun getResourceId(unit: MeasurementUnit): Int {
         MeasurementUnit.Dashes -> R.string.dashes
     }
 }
+fun MeasurementUnit.toLocalizedShortUnitStringId(): Int {
+    return when (this) {
+        MeasurementUnit.Grams -> R.string.shortGrams
+        MeasurementUnit.Kilograms -> R.string.shortKilograms
+        MeasurementUnit.Liters -> R.string.shortLiters
+        MeasurementUnit.Milliliters -> R.string.shortMilliliters
+        MeasurementUnit.Pints -> R.string.shortPints
+        MeasurementUnit.Quarts -> R.string.shortQuarts
+        MeasurementUnit.Gallons -> R.string.shortGallons
+        MeasurementUnit.Pounds -> R.string.shortPounds
+        MeasurementUnit.Ounces -> R.string.shortOunces
+        MeasurementUnit.Drams -> R.string.shortDrams
+        MeasurementUnit.Pieces -> R.string.shortPieces
+        MeasurementUnit.Portions -> R.string.shortPortions
+        MeasurementUnit.Teaspoons -> R.string.shortTeaspoons
+        MeasurementUnit.Tablespoons -> R.string.shortTablespoons
+        MeasurementUnit.Cups -> R.string.cups
+        MeasurementUnit.Pinches -> R.string.pinches
+        MeasurementUnit.Dashes -> R.string.dashes
+    }
+}
+

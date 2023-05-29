@@ -31,6 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import net.kahlenberger.eberhard.coad.R
+import net.kahlenberger.eberhard.coad.backend.toLocalizedShortUnitStringId
 import net.kahlenberger.eberhard.coad.screens.Screen
 import net.kahlenberger.eberhard.coad.uidata.Dish
 import net.kahlenberger.eberhard.coad.uidata.DishesViewModel
@@ -95,8 +96,9 @@ fun DishItem(dish: Dish, onDelete: (Dish) -> Unit) {
                 modifier = Modifier.weight(1f)
             )
             Text(
-                text = "${dish.totalCalories} kcal",
-                style = MaterialTheme.typography.body1,
+                text = "${dish.totalCalories} kcal / " + dish.basicQuantityInput + " " +
+                        stringResource(dish.unit.toLocalizedShortUnitStringId()),
+                style = MaterialTheme.typography.body2,
                 textAlign = TextAlign.End
             )
             IconButton(onClick = { onDelete(dish) }) {

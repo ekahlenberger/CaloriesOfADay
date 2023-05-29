@@ -28,6 +28,7 @@
     <string name="addConsumedItemHeadline">Add Consumed Item</string>
     <string name="addConsumedItemCaloriesLabel">Calories in kcal</string>
     <string name="addConsumedItemDishLabel">Dishes</string>
+
     <string name="grams">Grams</string>
     <string name="kilograms">Kilograms</string>
     <string name="liters">Liters</string>
@@ -45,4 +46,19 @@
     <string name="cups">Cups</string>
     <string name="pinches">Pinches</string>
     <string name="dashes">Dashes</string>
+
+    <string name="shortGrams">g</string>
+    <string name="shortKilograms">kg</string>
+    <string name="shortLiters">L</string>
+    <string name="shortMilliliters">ml</string>
+    <string name="shortPints">pt</string>
+    <string name="shortQuarts">qt</string>
+    <string name="shortGallons">gal</string>
+    <string name="shortPounds">lb</string>
+    <string name="shortOunces">oz</string>
+    <string name="shortDrams">dr</string>
+    <string name="shortPieces">pcs</string>
+    <string name="shortPortions">prt</string>
+    <string name="shortTeaspoons">tsp</string>
+    <string name="shortTablespoons">tbsp</string>
 </resources>
