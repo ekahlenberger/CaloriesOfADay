@@ -17,6 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import net.kahlenberger.eberhard.coad.R
+import net.kahlenberger.eberhard.coad.backend.MeasurementUnit
+import net.kahlenberger.eberhard.coad.backend.getResourceId
 import net.kahlenberger.eberhard.coad.ui.ComboBox
 import net.kahlenberger.eberhard.coad.uidata.Dish
 
@@ -34,11 +36,19 @@ fun AddChildDishDialog(showChildDishDialog: MutableState<Boolean>, dishes: List<
                 horizontalAlignment = Alignment.Start
                     ) {
                 ComboBox(items = dishes, selectedItem = selectedDish, labelText = stringResource(R.string.dish), itemToString = { dish -> dish?.name ?: ""})
-                Text((selectedDish.value?.calories?.toString() ?: "") + " kcal /"  + (selectedDish.value?.basicQuantity?.toString() ?: "") + " " + (selectedDish.value?.unit?.toString() ?: ""))
+                Text(
+                    (selectedDish.value?.calories?.toString() ?: "") +
+                        " kcal / "  +
+                        (selectedDish.value?.basicQuantity?.toString() ?: "") + " " +
+                        stringResource(getResourceId(selectedDish.value?.unit ?: MeasurementUnit.Grams))
+                )
                 OutlinedTextField(
                     value = selectedQuantity.value,
                     onValueChange = { selectedQuantity.value = it },
-                    label = { Text(stringResource(R.string.addChildDishQuantityLabel) + (selectedDish.value?.unit?.toString() ?: "")) },
+                    label = {
+                        Text(stringResource(R.string.addChildDishQuantityLabel) +
+                            stringResource(getResourceId(selectedDish.value?.unit ?: MeasurementUnit.Grams)))
+                    },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     modifier = Modifier.fillMaxWidth()
                 )
