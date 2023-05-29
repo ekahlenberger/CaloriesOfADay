@@ -28,4 +28,21 @@
     <string name="addConsumedItemHeadline">Verzehrtes Gericht hinzufügen</string>
     <string name="addConsumedItemCaloriesLabel">Kalorien in kcal</string>
     <string name="addConsumedItemDishLabel">Gerichte</string>
+    <string name="grams">Gramm</string>
+    <string name="kilograms">Kilogramm</string>
+    <string name="liters">Liter</string>
+    <string name="milliliters">Milliliter</string>
+    <string name="pints">Pints</string>
+    <string name="quarts">Quarts</string>
+    <string name="gallons">Gallonen</string>
+    <string name="pounds">Pfund</string>
+    <string name="ounces">Unzen</string>
+    <string name="drams">Drams</string>
+    <string name="pieces">Stücke</string>
+    <string name="portions">Portionen</string>
+    <string name="teaspoons">Teelöffel</string>
+    <string name="tablespoons">Esslöffel</string>
+    <string name="cups">Tassen</string>
+    <string name="pinches">Prisen</string>
+    <string name="dashes">Spritzer</string>
 </resources>

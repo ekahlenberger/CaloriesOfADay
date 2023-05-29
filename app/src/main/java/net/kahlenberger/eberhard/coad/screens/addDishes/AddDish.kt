@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import net.kahlenberger.eberhard.coad.R
 import net.kahlenberger.eberhard.coad.backend.MeasurementUnit
+import net.kahlenberger.eberhard.coad.backend.getResourceId
 import net.kahlenberger.eberhard.coad.screens.SingleLineNextTextField
 import net.kahlenberger.eberhard.coad.ui.ComboBox
 import net.kahlenberger.eberhard.coad.uidata.Dish
@@ -49,6 +50,25 @@ fun AddDish(
     val showChildDishDialog = remember { mutableStateOf(false) }
     val dishes by viewModel.dishes.observeAsState(emptyList())
 
+    val localizedUnitNames = mapOf(
+        MeasurementUnit.Grams to stringResource(getResourceId(MeasurementUnit.Grams)),
+        MeasurementUnit.Kilograms to stringResource(getResourceId(MeasurementUnit.Kilograms)),
+        MeasurementUnit.Milliliters to stringResource(getResourceId(MeasurementUnit.Milliliters)),
+        MeasurementUnit.Liters to stringResource(getResourceId(MeasurementUnit.Liters)),
+        MeasurementUnit.Pieces to stringResource(getResourceId(MeasurementUnit.Pieces)),
+        MeasurementUnit.Portions to stringResource(getResourceId(MeasurementUnit.Portions)),
+        MeasurementUnit.Teaspoons to stringResource(getResourceId(MeasurementUnit.Teaspoons)),
+        MeasurementUnit.Tablespoons to stringResource(getResourceId(MeasurementUnit.Tablespoons)),
+        MeasurementUnit.Cups to stringResource(getResourceId(MeasurementUnit.Cups)),
+        MeasurementUnit.Pinches to stringResource(getResourceId(MeasurementUnit.Pinches)),
+        MeasurementUnit.Dashes to stringResource(getResourceId(MeasurementUnit.Dashes)),
+        MeasurementUnit.Pints to stringResource(getResourceId(MeasurementUnit.Pints)),
+        MeasurementUnit.Quarts to stringResource(getResourceId(MeasurementUnit.Quarts)),
+        MeasurementUnit.Gallons to stringResource(getResourceId(MeasurementUnit.Gallons)),
+        MeasurementUnit.Pounds to stringResource(getResourceId(MeasurementUnit.Pounds)),
+        MeasurementUnit.Ounces to stringResource(getResourceId(MeasurementUnit.Ounces)),
+        MeasurementUnit.Drams to stringResource(getResourceId(MeasurementUnit.Drams)),
+    )
 
     AddChildDishDialog(
         showChildDishDialog = showChildDishDialog,
@@ -56,15 +76,17 @@ fun AddDish(
         selectedChildDishes = selectedChildDishes
     )
 
-    Card(modifier = Modifier.fillMaxSize().padding(16.dp))
+    Card(modifier = Modifier
+        .fillMaxSize()
+        .padding(16.dp))
     {
         Box(modifier = Modifier.fillMaxSize())
         {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(vertical = 16.dp).
-                    padding(start= (0.05f * LocalConfiguration.current.screenWidthDp).dp),
+                    .padding(vertical = 16.dp)
+                    .padding(start = (0.05f * LocalConfiguration.current.screenWidthDp).dp),
                 horizontalAlignment = Alignment.Start
             ) {
                 Text(text = stringResource(R.string.addDishHeadline), style = MaterialTheme.typography.h6)
@@ -83,7 +105,7 @@ fun AddDish(
                 )
                 Row (
                     modifier = Modifier.fillMaxWidth(0.9f),
-                        ) {  // New row for amount and unit
+                ) {  // New row for amount and unit
                     SingleLineNextTextField(
                         value = dishAmount.value,
                         onValueChange = { dishAmount.value = it },
@@ -96,7 +118,7 @@ fun AddDish(
                         items = MeasurementUnit.values().toList(),
                         selectedItem = dishUnit,
                         labelText = stringResource(R.string.addDishUnitLabel),
-                        modifier = Modifier.fillMaxWidth()
+                        itemToString = { item -> localizedUnitNames[item] ?: "" }
                     )
                 }
                 if (!dishes.isEmpty())
@@ -123,7 +145,9 @@ fun AddDish(
 
 
             }
-            Row(modifier = Modifier.align(Alignment.BottomEnd).padding(bottom = 16.dp)) {
+            Row(modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(bottom = 16.dp)) {
 
                 TextButton(
                     onClick = { navController.navigateUp() }) {
