@@ -35,6 +35,8 @@ fun <T> ComboBox(
     modifier: Modifier = Modifier,
     textFieldModifier: Modifier = Modifier,
     itemToString: (T) -> String = { it.toString() },
+    stringToItem: (String) -> T? = { null },
+    freeText: Boolean = false,
 ) {
     var expanded by remember { mutableStateOf(false) }
     var textfieldSize by remember { mutableStateOf(IntSize.Zero) }
@@ -49,7 +51,19 @@ fun <T> ComboBox(
     Box(modifier) {
         OutlinedTextField(
             value = itemToString(selectedItem.value),
-            onValueChange = { },
+            onValueChange = {
+                    if (freeText) {
+                        var assigned = false
+                        items.forEach { item ->
+                            if (itemToString(item) == it) {
+                                selectedItem.value = item
+                                assigned = true
+                            }
+                        }
+                        if (!assigned)
+                            selectedItem.value = stringToItem(it) ?: selectedItem.value
+                }
+            },
             label = { Text(labelText) },
             trailingIcon = {
                 Icon(icon, "combobox open/close icon")
@@ -62,21 +76,23 @@ fun <T> ComboBox(
                 }.onFocusChanged { focusState ->
                     if (focusState.isFocused) {
                         expanded = true
-                        focusManager.clearFocus()
+                        if (!freeText)
+                            focusManager.clearFocus()
                     }
                 }.pointerInput(Unit) {
                     detectTapGestures(
                         onLongPress = {
                             expanded = true
-                            focusManager.clearFocus()
+                            if (!freeText)
+                                focusManager.clearFocus()
                         },
                         onTap = {
                             expanded = true
-                            focusManager.clearFocus()
+                            if (!freeText)
+                                focusManager.clearFocus()
                         }
                     )
                 },
-            readOnly = false,
             interactionSource = interactionSource,
         )
         DropdownMenu(

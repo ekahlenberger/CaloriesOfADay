@@ -58,7 +58,7 @@ fun Navigation(mainViewModel: MainViewModel, dishesViewModel: DishesViewModel) {
             NavHost(navController = navController, startDestination = Screen.Home.route) {
                 composable(Screen.Home.route) {
                     val dummyConfiguredLimits = ConfiguredLimits(2500, 75f)
-                    HomeScreen(mainViewModel, dummyConfiguredLimits, innerPadding)
+                    HomeScreen(mainViewModel, dishesViewModel, dummyConfiguredLimits, innerPadding)
                 }
                 composable(Screen.Dishes.route) {
                     DishesScreen(dishesViewModel, innerPadding, navController)

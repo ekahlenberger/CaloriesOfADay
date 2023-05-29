@@ -49,7 +49,6 @@ fun DishesScreen(viewModel: DishesViewModel, innerPadding: PaddingValues, navCon
             Text(
                 text = "Dishes",
                 style = MaterialTheme.typography.h5,
-                //color = MaterialTheme.colors.primary,
                 modifier = Modifier.padding(8.dp),
             )
 
