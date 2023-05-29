@@ -25,9 +25,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import net.kahlenberger.eberhard.coad.R
 import net.kahlenberger.eberhard.coad.backend.MeasurementUnit
 import net.kahlenberger.eberhard.coad.screens.SingleLineNextTextField
 import net.kahlenberger.eberhard.coad.ui.ComboBox
@@ -65,17 +67,17 @@ fun AddDish(
                     padding(start= (0.05f * LocalConfiguration.current.screenWidthDp).dp),
                 horizontalAlignment = Alignment.Start
             ) {
-                Text(text = "Add Dish", style = MaterialTheme.typography.h6)
+                Text(text = stringResource(R.string.addDishHeadline), style = MaterialTheme.typography.h6)
                 SingleLineNextTextField(
                     value = dishName.value,
                     onValueChange = { dishName.value = it },
-                    label = { Text("Dish Name") },
+                    label = { Text(stringResource(R.string.addDishNameLabel)) },
                     modifier = Modifier.fillMaxWidth(0.9f),
                 )
                 SingleLineNextTextField(
                     value = dishCalories.value,
                     onValueChange = { dishCalories.value = it },
-                    label = { Text("Calories") },
+                    label = { Text(stringResource(R.string.addDishCaloriesLabel)) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     modifier = Modifier.fillMaxWidth(0.9f)
                 )
@@ -85,7 +87,7 @@ fun AddDish(
                     SingleLineNextTextField(
                         value = dishAmount.value,
                         onValueChange = { dishAmount.value = it },
-                        label = { Text("Amount") },
+                        label = { Text(stringResource(R.string.addDishAmountLabel)) },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                         modifier = Modifier.fillMaxWidth(0.35f)
                     )
@@ -93,7 +95,7 @@ fun AddDish(
                     ComboBox(
                         items = MeasurementUnit.values().toList(),
                         selectedItem = dishUnit,
-                        labelText = "Unit",
+                        labelText = stringResource(R.string.addDishUnitLabel),
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
@@ -106,7 +108,7 @@ fun AddDish(
                             }
                         )
                         {
-                            Text("Add child dish")
+                            Text(stringResource(R.string.addDishAddChildDishButton))
                         }
                         LazyColumn {
                             items(selectedChildDishes) { (dish, quantity) ->
@@ -125,7 +127,7 @@ fun AddDish(
 
                 TextButton(
                     onClick = { navController.navigateUp() }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.cancelButtonText))
                 }
                 Spacer(modifier = Modifier.width(8.dp))
                 Button(onClick = {
@@ -141,7 +143,7 @@ fun AddDish(
                     )
                     navController.navigateUp()
                 }) {
-                    Text("Add Dish")
+                    Text(stringResource(R.string.addDishButtonOk))
                 }
                 Spacer(modifier = Modifier.width((0.05f * LocalConfiguration.current.screenWidthDp).dp))
             }

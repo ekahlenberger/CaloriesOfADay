@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">KalorienDesTages</string>
+    <string name="mainNavHome">Startseite</string>
+    <string name="mainNavDishes">Gerichte</string>
+    <string name="consumedCalories">Verzehrte Kalorien</string>
+    <string name="maxLabel">Max</string>
+    <string name="save">Speichern</string>
+    <string name="edit">Bearbeiten</string>
+    <string name="consumptionHeadline">Heutiger Verzehr</string>
+    <string name="emptyConsumptionHint">Noch nichts gegessen, Zeit fürs Frühstück. Hunger ist ungesund. Iss etwas Gesundes.</string>
+    <string name="deleteConsumedItem">Verzehrtes Gericht löschen</string>
+    <string name="dishesHeadline">Gerichte</string>
+    <string name="addDish">Gericht hinzufügen</string>
+    <string name="deleteDish">Gericht löschen</string>
+    <string name="addDishHeadline">Gericht hinzufügen</string>
+    <string name="addDishNameLabel">Name</string>
+    <string name="addDishCaloriesLabel">Kalorien in kcal</string>
+    <string name="addDishAmountLabel">Menge</string>
+    <string name="addDishUnitLabel">Einheit</string>
+    <string name="addDishAddChildDishButton">Zutat hinzufügen</string>
+    <string name="cancelButtonText">Abbrechen</string>
+    <string name="addDishButtonOk">Gericht hinzufügen</string>
+    <string name="addChildDishHeadline">Bestehendes Gericht \"%1s\" als Zutat hinzufügen</string>
+    <string name="dish">Gericht</string>
+    <string name="addChildDishQuantityLabel">"Menge in "</string>
+    <string name="addChildDishAddButtonText">Zutat hinzufügen</string>
+    <string name="uiComboBoxOpenCloseIconDescription">Combobox öffnen/schließen Symbol</string>
+    <string name="addConsumedItemHeadline">Verzehrtes Gericht hinzufügen</string>
+    <string name="addConsumedItemCaloriesLabel">Kalorien in kcal</string>
+    <string name="addConsumedItemDishLabel">Gerichte</string>
+</resources>

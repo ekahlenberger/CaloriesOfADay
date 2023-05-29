@@ -26,9 +26,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import net.kahlenberger.eberhard.coad.R
 import net.kahlenberger.eberhard.coad.screens.Screen
 import net.kahlenberger.eberhard.coad.uidata.Dish
 import net.kahlenberger.eberhard.coad.uidata.DishesViewModel
@@ -47,7 +49,7 @@ fun DishesScreen(viewModel: DishesViewModel, innerPadding: PaddingValues, navCon
             modifier = Modifier.fillMaxSize()
         ) {
             Text(
-                text = "Dishes",
+                text = stringResource(R.string.dishesHeadline),
                 style = MaterialTheme.typography.h5,
                 modifier = Modifier.padding(8.dp),
             )
@@ -70,7 +72,7 @@ fun DishesScreen(viewModel: DishesViewModel, innerPadding: PaddingValues, navCon
                         .align(Alignment.BottomEnd)
                         .padding(16.dp)
                 ) {
-                    Icon(Icons.Filled.Add, contentDescription = "Add Dish")
+                    Icon(Icons.Filled.Add, contentDescription = stringResource(R.string.addDish))
                 }
             }
         }
@@ -98,7 +100,7 @@ fun DishItem(dish: Dish, onDelete: (Dish) -> Unit) {
                 textAlign = TextAlign.End
             )
             IconButton(onClick = { onDelete(dish) }) {
-                Icon(Icons.Filled.Delete, contentDescription = "Delete Consumed Item")
+                Icon(Icons.Filled.Delete, contentDescription = stringResource(R.string.deleteDish))
             }
         }
         if (dish.childDishes.size > 1)

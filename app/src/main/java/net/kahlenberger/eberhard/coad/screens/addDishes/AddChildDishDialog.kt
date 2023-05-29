@@ -14,7 +14,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import net.kahlenberger.eberhard.coad.R
 import net.kahlenberger.eberhard.coad.ui.ComboBox
 import net.kahlenberger.eberhard.coad.uidata.Dish
 
@@ -26,17 +28,17 @@ fun AddChildDishDialog(showChildDishDialog: MutableState<Boolean>, dishes: List<
     if (!showChildDishDialog.value) return
     AlertDialog(
         onDismissRequest = { showChildDishDialog.value = false },
-        title = { Text("Add Child Dish " + (selectedDish.value?.name ?: "")) },
+        title = { Text(stringResource(R.string.addChildDishHeadline,selectedDish.value?.name ?: "")) },
         text = {
             Column (
                 horizontalAlignment = Alignment.Start
                     ) {
-                ComboBox(items = dishes, selectedItem = selectedDish, labelText = "Dish", itemToString = { dish -> dish?.name ?: ""})
+                ComboBox(items = dishes, selectedItem = selectedDish, labelText = stringResource(R.string.dish), itemToString = { dish -> dish?.name ?: ""})
                 Text((selectedDish.value?.calories?.toString() ?: "") + " kcal /"  + (selectedDish.value?.basicQuantity?.toString() ?: "") + " " + (selectedDish.value?.unit?.toString() ?: ""))
                 OutlinedTextField(
                     value = selectedQuantity.value,
                     onValueChange = { selectedQuantity.value = it },
-                    label = { Text("Quantity" + " in " + (selectedDish.value?.unit?.toString() ?: "")) },
+                    label = { Text(stringResource(R.string.addChildDishQuantityLabel) + (selectedDish.value?.unit?.toString() ?: "")) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -49,12 +51,12 @@ fun AddChildDishDialog(showChildDishDialog: MutableState<Boolean>, dishes: List<
                     showChildDishDialog.value = false
                 }
             ) {
-                Text("Add")
+                Text(stringResource(R.string.addChildDishAddButtonText))
             }
         },
         dismissButton = {
             TextButton(onClick = { showChildDishDialog.value = false }) {
-                Text("Cancel")
+                Text(stringResource(id = R.string.cancelButtonText))
             }
         }
     )

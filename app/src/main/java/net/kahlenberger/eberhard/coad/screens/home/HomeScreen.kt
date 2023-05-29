@@ -34,8 +34,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import net.kahlenberger.eberhard.coad.R
 import net.kahlenberger.eberhard.coad.backend.MeasurementUnit
 import net.kahlenberger.eberhard.coad.ui.ComboBox
 import net.kahlenberger.eberhard.coad.uidata.ConfiguredLimits
@@ -58,7 +60,9 @@ fun HomeScreen(
     val maxCalorieValue by viewModel.maxCalorieValue.observeAsState(0)
 
     HandleAddDialog(showAddDialog, viewModel, dishesViewModel)
-    Box(modifier = Modifier.fillMaxSize().padding(innerPadding)) {
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .padding(innerPadding)) {
         if (LocalConfiguration.current.orientation == Configuration.ORIENTATION_PORTRAIT) {
             // Vertical layout for portrait mode
             Column(
@@ -89,7 +93,8 @@ fun HomeScreen(
                         onClick = { showAddDialog.value = true },
                         modifier = Modifier
                             .align(Alignment.TopStart)
-                            .offset(y = -28.dp).padding(horizontal = 16.dp)
+                            .offset(y = -28.dp)
+                            .padding(horizontal = 16.dp)
                     ) {
                         Icon(Icons.Filled.Add, contentDescription = "Add Consumed Item")
                     }
@@ -127,7 +132,8 @@ fun HomeScreen(
                         onClick = { showAddDialog.value = true },
                         modifier = Modifier
                             .align(Alignment.TopStart)
-                            .offset(x = -28.dp).padding(vertical = 16.dp)
+                            .offset(x = -28.dp)
+                            .padding(vertical = 16.dp)
                     ) {
                         Icon(Icons.Filled.Add, contentDescription = "Add Consumed Item")
                     }
@@ -157,20 +163,20 @@ private fun HandleAddDialog(
     if (showDialog.value) {
         AlertDialog(
             onDismissRequest = { showDialog.value = false },
-            title = { Text("Add Consumed Item") },
+            title = { Text(stringResource(R.string.addConsumedItemHeadline)) },
             text = {
                 Column {
                     ComboBox(
                         dishes,
                         selectedItem = selectedDish,
-                        "Dishes",
+                        stringResource(R.string.addConsumedItemDishLabel),
                         itemToString = { it?.name ?: "" },
                         stringToItem = { Dish(0,it,0,MeasurementUnit.Grams,"0") },
                         freeText = true)
                     OutlinedTextField(
                         value = itemCalories.value,
                         onValueChange = { itemCalories.value = it },
-                        label = { Text("Calories") },
+                        label = { Text(stringResource(R.string.addConsumedItemCaloriesLabel)) },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
                 }

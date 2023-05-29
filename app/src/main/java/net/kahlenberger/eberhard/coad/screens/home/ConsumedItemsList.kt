@@ -1,17 +1,33 @@
 package net.kahlenberger.eberhard.coad.screens.home
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import net.kahlenberger.eberhard.coad.R
 import net.kahlenberger.eberhard.coad.uidata.ConsumedItem
 
 @Composable
@@ -31,7 +47,7 @@ fun ConsumedItemsList(consumedItems: List<ConsumedItem>, onDelete: (ConsumedItem
                 modifier = Modifier.fillMaxSize()
             ) {
                 Text(
-                    text = "Today's consumption",
+                    text = stringResource(R.string.consumptionHeadline),
                     style = MaterialTheme.typography.h5,
                     modifier = Modifier.padding(8.dp),
                 )
@@ -46,7 +62,7 @@ fun ConsumedItemsList(consumedItems: List<ConsumedItem>, onDelete: (ConsumedItem
                     )
                     {
                         Text(
-                            text = "Nothing eaten yet, time for breakfast. Hunger is not healthy. Eat something healthy.",
+                            text = stringResource(R.string.emptyConsumptionHint),
                             style = MaterialTheme.typography.subtitle1,
                             textAlign = TextAlign.Center,
                             modifier = Modifier
@@ -89,7 +105,7 @@ fun ConsumedItemRow(item: ConsumedItem, onDelete: (ConsumedItem) -> Unit) {
             textAlign = TextAlign.End
         )
         IconButton(onClick = { onDelete(item) }) {
-            Icon(Icons.Filled.Delete, contentDescription = "Delete Consumed Item")
+            Icon(Icons.Filled.Delete, contentDescription = stringResource(R.string.deleteConsumedItem))
         }
     }
 }

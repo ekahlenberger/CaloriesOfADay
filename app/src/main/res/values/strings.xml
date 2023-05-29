@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">CaloriesOfADay</string>
+    <string name="mainNavHome">Home</string>
+    <string name="mainNavDishes">Dishes</string>
+    <string name="consumedCalories">Consumed Calories</string>
+    <string name="maxLabel">Max</string>
+    <string name="save">Save</string>
+    <string name="edit">Edit</string>
+    <string name="consumptionHeadline">Today\'s consumption</string>
+    <string name="emptyConsumptionHint">Nothing eaten yet, time for breakfast. Hunger is not healthy. Eat something healthy.</string>
+    <string name="deleteConsumedItem">Delete consumed dish</string>
+    <string name="dishesHeadline">Dishes</string>
+    <string name="addDish">Add dish</string>
+    <string name="deleteDish">Delete dish</string>
+    <string name="addDishHeadline">Add dish</string>
+    <string name="addDishNameLabel">Name</string>
+    <string name="addDishCaloriesLabel">Calories in kcal</string>
+    <string name="addDishAmountLabel">Amount</string>
+    <string name="addDishUnitLabel">Unit</string>
+    <string name="addDishAddChildDishButton">Add ingredient</string>
+    <string name="cancelButtonText">Cancel</string>
+    <string name="addDishButtonOk">Add dish</string>
+    <string name="addChildDishHeadline">Add existing dish \"%1s\" as ingredient</string>
+    <string name="dish">Dish</string>
+    <string name="addChildDishQuantityLabel">"Quantity in "</string>
+    <string name="addChildDishAddButtonText">Add ingredient</string>
+    <string name="uiComboBoxOpenCloseIconDescription">combobox open/close icon</string>
+    <string name="addConsumedItemHeadline">Add Consumed Item</string>
+    <string name="addConsumedItemCaloriesLabel">Calories in kcal</string>
+    <string name="addConsumedItemDishLabel">Dishes</string>
 </resources>

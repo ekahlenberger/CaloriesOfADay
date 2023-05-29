@@ -1,8 +1,20 @@
 package net.kahlenberger.eberhard.coad.screens.home
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Edit
@@ -13,9 +25,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import net.kahlenberger.eberhard.coad.R
 import java.lang.Float.min
 
 @Composable
@@ -39,7 +53,7 @@ fun CaloriesCard(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(16.dp)
         ) {
-            Text(text = "Consumed Calories", style = MaterialTheme.typography.h5)
+            Text(text = stringResource(R.string.consumedCalories), style = MaterialTheme.typography.h5)
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = value,
                  style = MaterialTheme.typography.h3.copy(color = consumedCaloriesColor),
@@ -58,7 +72,7 @@ fun CaloriesCard(
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                         singleLine = true,
                         modifier = Modifier.width(100.dp),
-                        label = { Text("Max:") },
+                        label = { Text("${stringResource(R.string.maxLabel)}:") },
                         isError = editedMaxCalorieValue.value.toIntOrNull() == null
                     )
                     IconButton(
@@ -69,9 +83,11 @@ fun CaloriesCard(
                                 onUpdateMaxCalorieValue(newMaxValue)
                             }
                         },
-                        modifier = Modifier.width(24.dp).padding(8.dp)
+                        modifier = Modifier
+                            .width(24.dp)
+                            .padding(8.dp)
                     ) {
-                        Icon(Icons.Filled.Done, contentDescription = "Save")
+                        Icon(Icons.Filled.Done, contentDescription = stringResource(R.string.save))
                     }
                 }
             } else {
@@ -87,9 +103,11 @@ fun CaloriesCard(
                             isEditing.value = true
                             editedMaxCalorieValue.value = maxCalorieValue.toString()
                         },
-                        modifier = Modifier.width(16.dp).padding(start = 8.dp)
+                        modifier = Modifier
+                            .width(16.dp)
+                            .padding(start = 8.dp)
                     ) {
-                        Icon(Icons.Filled.Edit, contentDescription = "Edit")
+                        Icon(Icons.Filled.Edit, contentDescription = stringResource(R.string.edit))
                     }
                 }
             }

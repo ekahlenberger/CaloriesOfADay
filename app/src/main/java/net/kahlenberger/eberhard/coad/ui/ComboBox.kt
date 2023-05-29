@@ -25,7 +25,9 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntSize
+import net.kahlenberger.eberhard.coad.R
 
 @Composable
 fun <T> ComboBox(
@@ -66,7 +68,7 @@ fun <T> ComboBox(
             },
             label = { Text(labelText) },
             trailingIcon = {
-                Icon(icon, "combobox open/close icon")
+                Icon(icon, stringResource(R.string.uiComboBoxOpenCloseIconDescription))
             },
             modifier = textFieldModifier
                 .fillMaxWidth()
