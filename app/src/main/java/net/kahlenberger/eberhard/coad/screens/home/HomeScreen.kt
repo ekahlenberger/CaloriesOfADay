@@ -39,6 +39,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import net.kahlenberger.eberhard.coad.R
 import net.kahlenberger.eberhard.coad.backend.MeasurementUnit
+import net.kahlenberger.eberhard.coad.backend.getResourceId
 import net.kahlenberger.eberhard.coad.ui.ComboBox
 import net.kahlenberger.eberhard.coad.uidata.ConfiguredLimits
 import net.kahlenberger.eberhard.coad.uidata.ConsumedItem
@@ -152,10 +153,18 @@ private fun HandleAddDialog(
     val dishes by dishesViewModel.dishes.observeAsState(emptyList())
     val selectedDish = remember { mutableStateOf(dishes.firstOrNull()) }
     val itemCalories = remember { mutableStateOf("") }
+    val itemQuantity = remember { mutableStateOf("") }
 
     LaunchedEffect(selectedDish.value) {
         if (selectedDish.value?.totalCalories ?: 0 > 0) {
             itemCalories.value = selectedDish.value!!.totalCalories.toString()
+            itemQuantity.value = selectedDish.value!!.basicQuantityInput
+        }
+    }
+    
+    LaunchedEffect(itemQuantity.value){
+        if (itemQuantity.value.isNotEmpty() && (selectedDish.value?.basicQuantityInput?.toDouble() ?: 0.0) > 0 && selectedDish.value?.totalCalories ?: 0 > 0){
+            itemCalories.value = (selectedDish.value!!.totalCalories * itemQuantity.value.toInt() / selectedDish.value?.basicQuantityInput?.toDouble()!!).toInt().toString()
         }
     }
 
@@ -172,6 +181,16 @@ private fun HandleAddDialog(
                         itemToString = { it?.name ?: "" },
                         stringToItem = { Dish(0,it,0,MeasurementUnit.Grams,"0") },
                         freeText = true)
+                    OutlinedTextField(
+                        value = itemQuantity.value,
+                        onValueChange = { itemQuantity.value = it },
+                        label = {
+                            Text(stringResource(R.string.addChildDishQuantityLabel) +
+                                    stringResource(selectedDish.value?.unit?.getResourceId() ?: R.string.grams))
+                        },
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        modifier = Modifier.fillMaxWidth()
+                    )
                     OutlinedTextField(
                         value = itemCalories.value,
                         onValueChange = { itemCalories.value = it },
