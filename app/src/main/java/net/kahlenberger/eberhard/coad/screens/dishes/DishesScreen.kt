@@ -113,7 +113,7 @@ fun DishItem(dish: Dish, onDelete: (Dish) -> Unit) {
             ){
                 Spacer(modifier = Modifier.width(16.dp))
                 Text(
-                    text = dish.childDishes.sortedBy { it.totalCalories }.joinToString(separator = ", ") { it.name },
+                    text = dish.childDishes.sortedByDescending { it.totalCalories }.joinToString(separator = ", ") { it.name },
                     style = MaterialTheme.typography.body2,
                     modifier = Modifier.weight(1f)
                 )
