@@ -1,13 +1,17 @@
 package net.kahlenberger.eberhard.coad.uidata
 
 import android.app.Application
-import androidx.lifecycle.*
-import net.kahlenberger.eberhard.coad.backend.ConsumedItemsDao
-import kotlinx.coroutines.launch
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import net.kahlenberger.eberhard.coad.backend.ConsumedItemsDao
 import java.time.LocalDateTime
 
 val Application.dataStore by preferencesDataStore("prefs")
@@ -30,7 +34,7 @@ class MainViewModel(application: Application, private val consumedItemsDao: Cons
 
 
     init {
-        removeAllConsumedItemsBeforeToday()
+        removeAllConsumedItemsBeforeToday(false)
         viewModelScope.launch {
             LoadConsumedItems()
             _consumedSum.value = _consumedItems.value?.sumOf { it.calories } ?: 0
@@ -67,9 +71,14 @@ class MainViewModel(application: Application, private val consumedItemsDao: Cons
         }
     }
 
-    fun removeAllConsumedItemsBeforeToday() {
+    fun removeAllConsumedItemsBeforeToday(load: Boolean = false) {
         viewModelScope.launch {
-            consumedItemsDao.deleteItemsBefore(LocalDateTime.now().truncatedTo(java.time.temporal.ChronoUnit.DAYS))
+            if (consumedItemsDao.deleteItemsBefore(LocalDateTime.now().truncatedTo(java.time.temporal.ChronoUnit.DAYS)) > 0) {
+                if (load) {
+                    LoadConsumedItems()
+                    _consumedSum.value = _consumedItems.value?.sumOf { it.calories } ?: 0
+                }
+            }
         }
     }
 }

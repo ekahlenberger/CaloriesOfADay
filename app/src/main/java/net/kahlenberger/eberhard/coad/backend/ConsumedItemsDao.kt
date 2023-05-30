@@ -20,5 +20,5 @@ interface ConsumedItemsDao {
     suspend fun deleteById(itemId: Int)
 
     @Query("DELETE FROM consumed_items WHERE date < :moment")
-    suspend fun deleteItemsBefore(moment: LocalDateTime)
+    suspend fun deleteItemsBefore(moment: LocalDateTime): Int
 }

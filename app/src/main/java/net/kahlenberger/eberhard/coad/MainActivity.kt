@@ -4,7 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import net.kahlenberger.eberhard.coad.uidata.DishesViewModel
 import net.kahlenberger.eberhard.coad.uidata.MainViewModel
 import java.time.Duration
@@ -31,7 +35,7 @@ class MainActivity : ComponentActivity() {
     }
     override fun onResume() {
         super.onResume()
-        mainViewModel.removeAllConsumedItemsBeforeToday()
+        mainViewModel.removeAllConsumedItemsBeforeToday(true)
         scheduleHourlyTask(mainViewModel)
     }
 
@@ -48,7 +52,7 @@ class MainActivity : ComponentActivity() {
                 val delayMillis = Duration.between(currentTime, nextHour).toMillis()
 
                 delay(delayMillis)
-                viewModel.removeAllConsumedItemsBeforeToday()
+                viewModel.removeAllConsumedItemsBeforeToday(true)
             }
         }
     }
