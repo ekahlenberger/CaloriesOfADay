@@ -28,6 +28,7 @@
     <string name="addConsumedItemHeadline">Add Consumed Item</string>
     <string name="addConsumedItemCaloriesLabel">Calories in kcal</string>
     <string name="addConsumedItemDishLabel">Dishes</string>
+    <string name="incrementConsumedItem">Add one serving</string>
 
     <string name="grams">Grams</string>
     <string name="kilograms">Kilograms</string>

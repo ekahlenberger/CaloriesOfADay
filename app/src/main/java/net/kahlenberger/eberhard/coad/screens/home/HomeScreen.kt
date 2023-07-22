@@ -52,7 +52,7 @@ import java.time.LocalDateTime
 fun HomeScreen(
     viewModel: MainViewModel,
     dishesViewModel: DishesViewModel,
-    configuredLimits: ConfiguredLimits,
+    //configuredLimits: ConfiguredLimits,
     innerPadding: PaddingValues,
 ) {
     val consumedItems by viewModel.consumedItems.observeAsState(emptyList())
@@ -79,8 +79,8 @@ fun HomeScreen(
                         onUpdateMaxCalorieValue = { newMaxCalorieValue ->
                             viewModel.updateMaxCalorieValue(newMaxCalorieValue)
                         },
-                        currentWeight = configuredLimits.startWeight,
-                        startingWeight = configuredLimits.startWeight
+                        //currentWeight = configuredLimits.startWeight,
+                        //startingWeight = configuredLimits.startWeight
                     )
                 }
                 Spacer(modifier = Modifier.height(16.dp))
@@ -89,7 +89,9 @@ fun HomeScreen(
                 {
                     ConsumedItemsList(
                         consumedItems,
-                        onDelete = { consumedItem -> viewModel.deleteConsumedItem(consumedItem.id) })
+                        onDelete = { consumedItem -> viewModel.deleteConsumedItem(consumedItem.id) },
+                        onIncrement = {consumedItem, index -> if (index == 0) viewModel.incrementConsumedItemCount(consumedItem.id) else viewModel.addConsumedItem(consumedItem.copy(id = 0, count=1,date = LocalDateTime.now())) }
+                    )
                     FloatingActionButton(
                         onClick = { showAddDialog.value = true },
                         modifier = Modifier
@@ -120,15 +122,17 @@ fun HomeScreen(
                         onUpdateMaxCalorieValue = { newMaxCalorieValue ->
                             viewModel.updateMaxCalorieValue(newMaxCalorieValue)
                         },
-                        currentWeight = configuredLimits.startWeight,
-                        startingWeight = configuredLimits.startWeight
+                        //currentWeight = configuredLimits.startWeight,
+                        //startingWeight = configuredLimits.startWeight
                     )
                 }
                 Box( modifier = Modifier.fillMaxSize())
                 {
                     ConsumedItemsList(
                         consumedItems,
-                        onDelete = { consumedItem -> viewModel.deleteConsumedItem(consumedItem.id) })
+                        onDelete = { consumedItem -> viewModel.deleteConsumedItem(consumedItem.id) },
+                        onIncrement = {consumedItem, index -> if (index == 0) viewModel.incrementConsumedItemCount(consumedItem.id) else viewModel.addConsumedItem(consumedItem.copy(id = 0, count=1,date = LocalDateTime.now())) }
+                    )
                     FloatingActionButton(
                         onClick = { showAddDialog.value = true },
                         modifier = Modifier
@@ -206,7 +210,15 @@ private fun HandleAddDialog(
                         val newConsumedItem = ConsumedItem(
                             name = selectedDish.value!!.name,
                             calories = itemCalories.value.toIntOrNull() ?: 0,
-                            date = LocalDateTime.now()
+                            date = LocalDateTime.now(),
+                            count = if (selectedDish.value!!.unit in setOf(
+                                    MeasurementUnit.Pieces,
+                                    MeasurementUnit.Portions,
+                                    MeasurementUnit.Teaspoons,
+                                    MeasurementUnit.Tablespoons,
+                                    MeasurementUnit.Cups,
+                                    MeasurementUnit.Pinches,
+                                    MeasurementUnit.Dashes)) itemQuantity.value.toIntOrNull() ?: 1 else 1
                         )
                         viewModel.addConsumedItem(newConsumedItem)
                         showDialog.value = false

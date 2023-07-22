@@ -5,10 +5,11 @@ import androidx.room.*
 import net.kahlenberger.eberhard.coad.backend.migrations.Migrate1_2
 
 @Database(entities = [ConsumedItemEntity::class, DishEntity::class, DishCrossRef::class],
-    version = 3,
+    version = 4,
     autoMigrations = [
         AutoMigration(from = 1, to = 2, spec = Migrate1_2::class),
-        AutoMigration(from = 2, to = 3)
+        AutoMigration(from = 2, to = 3),
+        AutoMigration(from = 3, to = 4)
     ])
 @TypeConverters(Converters::class)
 abstract class CaloriesDatabase : RoomDatabase() {

@@ -37,7 +37,7 @@ class MainViewModel(application: Application, private val consumedItemsDao: Cons
         removeAllConsumedItemsBeforeToday(false)
         viewModelScope.launch {
             LoadConsumedItems()
-            _consumedSum.value = _consumedItems.value?.sumOf { it.calories } ?: 0
+            _consumedSum.value = _consumedItems.value?.sumOf { it.totalCalories() } ?: 0
         }
     }
 
@@ -46,7 +46,7 @@ class MainViewModel(application: Application, private val consumedItemsDao: Cons
             val consumedItemEntity = consumedItem.toEntityModel()
             consumedItemsDao.insert(consumedItemEntity)
             LoadConsumedItems()
-            _consumedSum.value = consumedSum.value?.plus(consumedItem.calories)
+            _consumedSum.value = consumedSum.value?.plus(consumedItem.totalCalories())
         }
     }
 
@@ -54,7 +54,7 @@ class MainViewModel(application: Application, private val consumedItemsDao: Cons
         viewModelScope.launch {
             consumedItemsDao.deleteById(itemId)
             LoadConsumedItems()
-            _consumedSum.value = _consumedItems.value?.sumOf { it.calories } ?: 0
+            _consumedSum.value = _consumedItems.value?.sumOf { it.totalCalories() } ?: 0
         }
     }
 
@@ -76,9 +76,16 @@ class MainViewModel(application: Application, private val consumedItemsDao: Cons
             if (consumedItemsDao.deleteItemsBefore(LocalDateTime.now().truncatedTo(java.time.temporal.ChronoUnit.DAYS)) > 0) {
                 if (load) {
                     LoadConsumedItems()
-                    _consumedSum.value = _consumedItems.value?.sumOf { it.calories } ?: 0
+                    _consumedSum.value = _consumedItems.value?.sumOf { it.totalCalories() } ?: 0
                 }
             }
+        }
+    }
+    fun incrementConsumedItemCount(itemId: Int) {
+        viewModelScope.launch {
+            consumedItemsDao.incrementCount(itemId)
+            LoadConsumedItems()
+            _consumedSum.value = _consumedItems.value?.sumOf { it.totalCalories() } ?: 0
         }
     }
 }

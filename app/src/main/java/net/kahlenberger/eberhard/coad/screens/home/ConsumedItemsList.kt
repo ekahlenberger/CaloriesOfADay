@@ -20,6 +20,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,7 +32,9 @@ import net.kahlenberger.eberhard.coad.R
 import net.kahlenberger.eberhard.coad.uidata.ConsumedItem
 
 @Composable
-fun ConsumedItemsList(consumedItems: List<ConsumedItem>, onDelete: (ConsumedItem) -> Unit) {
+fun ConsumedItemsList(consumedItems: List<ConsumedItem>,
+                      onDelete: (ConsumedItem) -> Unit,
+                      onIncrement: (ConsumedItem, Int) -> Unit) {
     Surface(
         elevation = 4.dp,
     ) {
@@ -78,7 +81,7 @@ fun ConsumedItemsList(consumedItems: List<ConsumedItem>, onDelete: (ConsumedItem
                     )
                     {
                         items(consumedItems) { item ->
-                            ConsumedItemRow(item, onDelete)
+                            ConsumedItemRow(item, onDelete) {onIncrement(item, consumedItems.indexOf(item))}
                         }
                     }
                 }
@@ -88,22 +91,31 @@ fun ConsumedItemsList(consumedItems: List<ConsumedItem>, onDelete: (ConsumedItem
 }
 
 @Composable
-fun ConsumedItemRow(item: ConsumedItem, onDelete: (ConsumedItem) -> Unit) {
+fun ConsumedItemRow(item: ConsumedItem,
+                    onDelete: (ConsumedItem) -> Unit,
+                    onIncrement: (ConsumedItem) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = item.name,
+            text = "${item.name} ${if (item.count > 1) "x ${item.count}" else ""}",
             style = MaterialTheme.typography.body1,
             modifier = Modifier.weight(1f)
         )
         Text(
-            text = "${item.calories} kcal",
+            text = "${item.totalCalories()} kcal",
             style = MaterialTheme.typography.body1,
             textAlign = TextAlign.End
         )
+        IconButton(onClick = { onIncrement(item) }) {
+            Icon(
+                Icons.Filled.Add,
+                contentDescription = stringResource(R.string.incrementConsumedItem),
+                tint = MaterialTheme.colors.secondary
+            )
+        }
         IconButton(onClick = { onDelete(item) }) {
             Icon(Icons.Filled.Delete, contentDescription = stringResource(R.string.deleteConsumedItem))
         }

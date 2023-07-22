@@ -1,6 +1,5 @@
 package net.kahlenberger.eberhard.coad.screens.home
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -37,8 +36,8 @@ fun CaloriesCard(
     value: String,
     maxCalorieValue: Int,
     onUpdateMaxCalorieValue: (Int) -> Unit,
-    currentWeight: Float,
-    startingWeight: Float
+//    currentWeight: Float,
+//    startingWeight: Float
 ) {
     val consumedCaloriesColor = getColorForConsumedCalories(value.toInt(), maxCalorieValue)
     val isEditing = remember { mutableStateOf(false) }
@@ -111,7 +110,7 @@ fun CaloriesCard(
                     }
                 }
             }
-
+/*
             Spacer(modifier = Modifier.height(16.dp)) // Add a spacer between main info and details
 
             Row(
@@ -130,6 +129,7 @@ fun CaloriesCard(
                     textAlign = TextAlign.Center
                 )
             }
+ */
         }
     }
 }

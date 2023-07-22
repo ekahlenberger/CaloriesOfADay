@@ -20,7 +20,6 @@ import net.kahlenberger.eberhard.coad.screens.Screen
 import net.kahlenberger.eberhard.coad.screens.addDishes.AddDish
 import net.kahlenberger.eberhard.coad.screens.dishes.DishesScreen
 import net.kahlenberger.eberhard.coad.screens.home.HomeScreen
-import net.kahlenberger.eberhard.coad.uidata.ConfiguredLimits
 import net.kahlenberger.eberhard.coad.uidata.DishesViewModel
 import net.kahlenberger.eberhard.coad.uidata.MainViewModel
 
@@ -66,8 +65,8 @@ fun Navigation(mainViewModel: MainViewModel, dishesViewModel: DishesViewModel) {
         content = { innerPadding ->
             NavHost(navController = navController, startDestination = Screen.Home.route) {
                 composable(Screen.Home.route) {
-                    val dummyConfiguredLimits = ConfiguredLimits(2500, 75f)
-                    HomeScreen(mainViewModel, dishesViewModel, dummyConfiguredLimits, innerPadding)
+                    //val dummyConfiguredLimits = ConfiguredLimits(2500, 75f)
+                    HomeScreen(mainViewModel, dishesViewModel, /*dummyConfiguredLimits,*/ innerPadding)
                 }
                 composable(Screen.Dishes.route) {
                     DishesScreen(dishesViewModel, innerPadding, navController)

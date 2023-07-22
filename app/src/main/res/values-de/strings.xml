@@ -28,6 +28,7 @@
     <string name="addConsumedItemHeadline">Verzehrtes Gericht hinzufügen</string>
     <string name="addConsumedItemCaloriesLabel">Kalorien in kcal</string>
     <string name="addConsumedItemDishLabel">Gerichte</string>
+    <string name="incrementConsumedItem">Eins hinzufügen</string>
 
     <string name="grams">Gramm</string>
     <string name="kilograms">Kilogramm</string>
