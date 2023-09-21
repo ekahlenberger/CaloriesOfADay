@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KalorienDesTages</string>
+    <string name="app_name">KeKcal</string>
     <string name="mainNavHome">Startseite</string>
     <string name="mainNavDishes">Gerichte</string>
     <string name="consumedCalories">Verzehrte Kalorien</string>

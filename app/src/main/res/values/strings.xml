@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CaloriesOfADay</string>
+    <string name="app_name">KeKcal</string>
     <string name="mainNavHome">Home</string>
     <string name="mainNavDishes">Dishes</string>
     <string name="consumedCalories">Consumed Calories</string>
