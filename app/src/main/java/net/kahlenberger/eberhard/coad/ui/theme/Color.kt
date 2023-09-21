@@ -2,7 +2,7 @@ package net.kahlenberger.eberhard.coad.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
+val Primary200 = Color(0xFF88d6c3)
+val Primary500 = Color(0xFF65c3ab)
+val Primary700 = Color(0xFF419882)
+val Highlight = Color(0xFFFCB425)

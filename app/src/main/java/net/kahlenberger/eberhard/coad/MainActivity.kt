@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import net.kahlenberger.eberhard.coad.ui.theme.CaloriesOfADayTheme
 import net.kahlenberger.eberhard.coad.uidata.DishesViewModel
 import net.kahlenberger.eberhard.coad.uidata.MainViewModel
 import java.time.Duration
@@ -30,7 +31,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Navigation(mainViewModel, dishesViewModel)
+            CaloriesOfADayTheme {
+                Navigation(mainViewModel, dishesViewModel)
+            }
         }
     }
     override fun onResume() {
