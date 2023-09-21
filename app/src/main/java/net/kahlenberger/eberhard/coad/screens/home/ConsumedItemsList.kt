@@ -100,7 +100,7 @@ fun ConsumedItemRow(item: ConsumedItem,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = "${item.name} ${if (item.count > 1) "x ${item.count}" else ""}",
+            text = "${item.name} ${if (item.count > 1) " x${item.count}" else ""}",
             style = MaterialTheme.typography.body1,
             modifier = Modifier.weight(1f)
         )

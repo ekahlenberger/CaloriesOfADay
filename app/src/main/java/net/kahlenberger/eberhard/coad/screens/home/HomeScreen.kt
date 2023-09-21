@@ -90,7 +90,16 @@ fun HomeScreen(
                     ConsumedItemsList(
                         consumedItems,
                         onDelete = { consumedItem -> viewModel.deleteConsumedItem(consumedItem.id) },
-                        onIncrement = {consumedItem, index -> if (index == 0) viewModel.incrementConsumedItemCount(consumedItem.id) else viewModel.addConsumedItem(consumedItem.copy(id = 0, count=1,date = LocalDateTime.now())) }
+                        onIncrement = { consumedItem, index ->
+                            val topItem = consumedItems.firstOrNull()
+                            if (topItem != null && topItem.name == consumedItem.name && topItem.calories == consumedItem.calories) {
+                                // Increment the top item if it matches the clicked item in terms of name and calories
+                                viewModel.incrementConsumedItemCount(topItem.id)
+                            } else {
+                                // Else, just add a new consumed item
+                                viewModel.addConsumedItem(consumedItem.copy(id = 0, count = 1, date = LocalDateTime.now()))
+                            }
+                        }
                     )
                     FloatingActionButton(
                         onClick = { showAddDialog.value = true },
@@ -171,7 +180,15 @@ private fun HandleAddDialog(
             itemCalories.value = (selectedDish.value!!.totalCalories * itemQuantity.value.toInt() / selectedDish.value?.basicQuantityInput?.toDouble()!!).toInt().toString()
         }
     }
-
+    val quantityBasedUnits = setOf(
+        MeasurementUnit.Pieces,
+        MeasurementUnit.Portions,
+        MeasurementUnit.Teaspoons,
+        MeasurementUnit.Tablespoons,
+        MeasurementUnit.Cups,
+        MeasurementUnit.Pinches,
+        MeasurementUnit.Dashes
+    )
     if (showDialog.value) {
         AlertDialog(
             onDismissRequest = { showDialog.value = false },
@@ -209,16 +226,9 @@ private fun HandleAddDialog(
                         if (selectedDish.value == null) return@Button
                         val newConsumedItem = ConsumedItem(
                             name = selectedDish.value!!.name,
-                            calories = itemCalories.value.toIntOrNull() ?: 0,
+                            calories = if (selectedDish.value!!.unit in quantityBasedUnits) selectedDish.value!!.totalCalories else itemCalories.value.toIntOrNull() ?: 0,
                             date = LocalDateTime.now(),
-                            count = if (selectedDish.value!!.unit in setOf(
-                                    MeasurementUnit.Pieces,
-                                    MeasurementUnit.Portions,
-                                    MeasurementUnit.Teaspoons,
-                                    MeasurementUnit.Tablespoons,
-                                    MeasurementUnit.Cups,
-                                    MeasurementUnit.Pinches,
-                                    MeasurementUnit.Dashes)) itemQuantity.value.toIntOrNull() ?: 1 else 1
+                            count = if (selectedDish.value!!.unit in quantityBasedUnits) itemQuantity.value.toIntOrNull() ?: 1 else 1
                         )
                         viewModel.addConsumedItem(newConsumedItem)
                         showDialog.value = false
